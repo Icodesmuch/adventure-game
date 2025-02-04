@@ -82,10 +82,14 @@ def game():
             item = command.split(" ", 1)[1]
             if item in player["inventory"]:
                 print("Using", item)
+
             else:
                 print("You don't have that item.")
         elif command == "fight":
             print("Fighting...")
+            outcome = fightController(room,player)
+            if outcome == "gameover":
+                break
         elif command == "flee":
             print("Fleeing...")
         elif command == "quit":
@@ -98,9 +102,6 @@ def game():
 def searchController():
     randomInt = random.randint(0,len(room["findables"]))
     item = room["findables"][randomInt]
-
-            
-
     if item == "rare relic":
         print("You found a rare relic.")
     elif item == "damage boost": 
@@ -120,5 +121,17 @@ def searchController():
     player["inventory"].append(item)
 
 
+
+def fightController(room, player):
+    if room["item"] == "monster":
+        player["health"] = player["health"] - 40
+        print("You defeated the monster.")
+        if player["health"] == 0:
+            print("You were killed by the monster.")
+            return "gameover"
+    else:
+        print("There are no monsters in this room.")
+
+    
 if __name__ == "__main__":
     game()
