@@ -59,7 +59,6 @@ def game():
             print("  - search")
             print("  - use [item]")
             print("  - fight")
-            print("  - flee")
             print("  - quit")
             print("")
         elif command.startswith("move"):
@@ -70,14 +69,8 @@ def game():
                 print("You can't move in that direction.")
         elif command == "search":
             print("Searching...")
-
-            # Allow the player to encounter a rare relic, monster, health and damage multiplier
-            # random.seed()
             searchController()
-
             
-
-
         elif command.startswith("use"):
             item = command.split(" ", 1)[1]
             if item in player["inventory"]:
@@ -90,8 +83,6 @@ def game():
             outcome = fightController(room,player)
             if outcome == "gameover":
                 break
-        elif command == "flee":
-            print("Fleeing...")
         elif command == "quit":
             print("Quitting...")
             break
@@ -100,7 +91,7 @@ def game():
         print("")
 
 def searchController():
-    randomInt = random.randint(0,len(room["findables"]))
+    randomInt = random.randint(0,(len(room["findables"]) - 1))
     item = room["findables"][randomInt]
     if item == "rare relic":
         print("You found a rare relic.")
@@ -123,7 +114,7 @@ def searchController():
 
 
 def fightController(room, player):
-    if room["item"] == "monster":
+    if room["items"] == "monster":
         player["health"] = player["health"] - 40
         print("You defeated the monster.")
         if player["health"] == 0:
