@@ -23,7 +23,7 @@
 # Encounters random events (monsters, loot, locked doors).
 # Chooses to fight, flee, or use items in battles.
 # Tries to find the exit before running out of health.
-
+import random
 player = { "name": "player",
                 "health": 100,
                 "damage": 20,
@@ -35,7 +35,8 @@ player = { "name": "player",
 room = { "name": "room",
                 "description": "You are in a dark room.",
                 "exits": ["north", "south", "east", "west"],
-                "items": ["torch", "key", "monster", "rare relic", ],
+                "items": ["torch", "key", "monster"],
+                "findables" : ["rare relic", "damage boost", "extra health"],
                 "locked": True
             }   
 def game():  
@@ -71,7 +72,10 @@ def game():
             print("Searching...")
 
             # Allow the player to encounter a rare relic, monster, health and damage multiplier
+            # random.seed()
+            searchController()
 
+            
 
 
         elif command.startswith("use"):
@@ -90,7 +94,30 @@ def game():
         else:
             print("Unknown command. Type 'help' for a list of commands.")
         print("")
-    
+
+def searchController():
+    randomInt = random.randint(0,len(room["findables"]))
+    item = room["findables"][randomInt]
+
+            
+
+    if item == "rare relic":
+        print("You found a rare relic.")
+    elif item == "damage boost": 
+        print("You found a 2x damage boost.")
+        damage = player["damage"] * 2
+        print("Your damage is now " + damage)
+    elif item == "extra health":
+        print("You found a extra health")
+        if player["health"] == 100: 
+            print("Health already full.")
+            return
+        elif player["health"] <= 80:
+            player["health"] = player["health"] + 20 
+            print("Health Replenished.")
+            print("Health: " + player["health"])
+             
+    player["inventory"].append(item)
 
 
 if __name__ == "__main__":
