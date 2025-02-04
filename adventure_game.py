@@ -1,28 +1,3 @@
-### **3. Text-Based Adventure Game**
-
-# - **Concepts:** Loops, conditionals, dictionaries.
-# - **Key Features:** User choices affect the outcome.
-# - **What You’ll Learn:**
-#     - Nested conditionals (`if-elif-else`)
-#     - Using dictionaries for game logic
-#     - Structuring a simple game loop
-
-
-# Game Idea: "Dungeon of Shadows"
-# A text-based adventure game where the player explores a dark dungeon, fights monsters, collects treasures, and tries to escape alive.
-
-# Game Features:
-# Rooms & Exploration: The player moves between different dungeon rooms, encountering random events.
-# Combat System: The player can fight or flee when encountering monsters.
-# Inventory System: Collect potions, weapons, and keys to unlock doors.
-# Random Events: Traps, treasure chests, or secret passages.
-# Win/Lose Condition: Escape the dungeon to win; die from monsters or traps to lose.
-# Basic Gameplay Flow:
-# Player starts in a dark dungeon with minimal supplies.
-# Moves through rooms using commands like "north", "south", "east", "west".
-# Encounters random events (monsters, loot, locked doors).
-# Chooses to fight, flee, or use items in battles.
-# Tries to find the exit before running out of health.
 import random
 player = { "name": "player",
                 "health": 100,
