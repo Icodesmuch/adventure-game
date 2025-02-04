@@ -98,7 +98,7 @@ def searchController():
     elif item == "damage boost": 
         print("You found a 2x damage boost.")
         damage = player["damage"] * 2
-        print("Your damage is now " + damage)
+        print("Your damage is now " + str(damage))
     elif item == "extra health":
         print("You found a extra health")
         if player["health"] == 100: 
@@ -114,12 +114,17 @@ def searchController():
 
 
 def fightController(room, player):
-    if room["items"] == "monster":
-        player["health"] = player["health"] - 40
-        print("You defeated the monster.")
-        if player["health"] == 0:
-            print("You were killed by the monster.")
-            return "gameover"
+    for item in room["items"]:
+        if item == "monster":
+
+            player["health"] = player["health"] - 40
+            room["items"].remove("monster")
+            print("You defeated the monster.")
+
+            if player["health"] <= 0:
+                print("You were killed by the monster.")
+                return "gameover"
+            break
     else:
         print("There are no monsters in this room.")
 
